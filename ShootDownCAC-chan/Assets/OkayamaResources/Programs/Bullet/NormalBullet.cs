@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 直進する弾丸を表すクラス
+/// </summary>
 public class NormalBullet : Bullet
 {
+
+    /// <summary>
+    /// このオブジェクトを指定した方向に指定したスピードで移動させる
+    /// </summary>
     protected override void Move()
     {
         float rad = base.moveDirection * Mathf.Deg2Rad;
@@ -14,13 +21,17 @@ public class NormalBullet : Bullet
         return;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// オブジェクトの生成時に実行されるメソッド
+    /// </summary>
+    protected override void Start()
     {
-
+        base.Start();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// 一定時間ごとに実行されるメソッド
+    /// </summary>
     void FixedUpdate()
     {
         this.Move();
