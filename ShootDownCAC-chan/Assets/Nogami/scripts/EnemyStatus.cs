@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
+    [SerializeField]
+    private int hp;
+    [SerializeField]
+    private int damage;
     // Start is called before the first frame update
     void Start()
     {
