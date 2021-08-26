@@ -63,7 +63,7 @@ public abstract class Bullet : MonoBehaviour
     /// <summary>
     /// 消滅までの時間分待ち、時間になったらこのオブジェクトを削除する
     /// </summary>
-    /// <param name="timeTolLive"></param>
+    /// <param name="timeTolLive">生存時間</param>
     /// <returns></returns>
     protected virtual IEnumerator TimeLimitCounter(float timeTolLive)
     {
