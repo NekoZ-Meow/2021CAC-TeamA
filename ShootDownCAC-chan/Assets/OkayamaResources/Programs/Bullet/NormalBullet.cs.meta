@@ -1,0 +1,25 @@
+<<<<<<< HEAD:ShootDownCAC-chan/Library/PackageCache/com.unity.2d.animation@5.0.6/Editor/AssemblyInfo.cs.meta
+fileFormatVersion: 2
+guid: 81d5f69f47c861d40beee8891a4ac92e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
+fileFormatVersion: 2
+guid: cd712d904bec4954aafd3a1127bf74e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> 125e3a136d95abc0867834ae875e638d6cd810ce:ShootDownCAC-chan/Assets/OkayamaResources/Programs/Bullet/NormalBullet.cs.meta
