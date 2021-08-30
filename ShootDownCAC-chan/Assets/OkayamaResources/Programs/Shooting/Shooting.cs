@@ -6,12 +6,12 @@ public abstract class Shooting
 {
     protected GameObject bullet; //発射する弾丸
 
-    protected GameObject player;
+    protected GameObject shooter; //射手
 
     /// <summary>
     /// 弾丸を発射する
     /// </summary>
-    public abstract void Shot();
+    public abstract void Shoot();
 
     /// <summary>
     /// 発射する弾丸

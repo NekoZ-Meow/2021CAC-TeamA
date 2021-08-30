@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
     private bool isWaitInterval = false;
 
     private GameObject bullet;
+
+    private Shooting shooting;
     // Start is called before the first frame update
     private void Start()
     {
         this.bullet = Resources.Load<GameObject>("Bullet/NormalBullet");
-        Debug.Log(this.bullet);
+        this.shooting = new NormalShooting(this.gameObject, this.bullet);
         return;
     }
 
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     {
         if (!this.isWaitInterval)
         {
-            Object.Instantiate(this.bullet, this.transform.position, Quaternion.identity);
+            this.shooting.Shoot();
             this.StartCoroutine(this.WaitInterval());
         }
         return;

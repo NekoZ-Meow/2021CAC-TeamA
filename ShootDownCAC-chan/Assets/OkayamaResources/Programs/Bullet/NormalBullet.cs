@@ -16,7 +16,7 @@ public class NormalBullet : Bullet
         float rad = base.moveDirection * Mathf.Deg2Rad;
         float xMove = base.moveSpeed * Mathf.Cos(rad);
         float yMove = base.moveSpeed * Mathf.Sin(rad);
-        this.transform.Translate(xMove, yMove, 0);
+        this.transform.position += new Vector3(xMove, yMove, 0);
 
         return;
     }
@@ -27,6 +27,8 @@ public class NormalBullet : Bullet
     protected override void Start()
     {
         base.Start();
+
+        return;
     }
 
     /// <summary>
@@ -35,5 +37,7 @@ public class NormalBullet : Bullet
     void FixedUpdate()
     {
         this.Move();
+
+        return;
     }
 }
