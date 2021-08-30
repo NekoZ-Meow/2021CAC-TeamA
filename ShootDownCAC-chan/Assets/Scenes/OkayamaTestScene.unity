@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78f34c47bf762848b14ae44d8dc2366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.05
+  moveSpeed: 7
   shotInterval: 0.1
 --- !u!212 &290219736
 SpriteRenderer:
@@ -449,6 +449,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1467228715}
+    - target: {fileID: 4155585817440846735, guid: 435af2a6eb2d99c42b883b59b401d16c, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155585817440846735, guid: 435af2a6eb2d99c42b883b59b401d16c, type: 3}
+      propertyPath: homingDegree
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4155585817440846773, guid: 435af2a6eb2d99c42b883b59b401d16c, type: 3}
       propertyPath: m_RootOrder
       value: 4

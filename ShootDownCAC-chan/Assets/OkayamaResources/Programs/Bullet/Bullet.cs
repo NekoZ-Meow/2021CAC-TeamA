@@ -7,10 +7,10 @@ using UnityEngine;
 /// </summary>
 public abstract class Bullet : MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed = 0; //弾丸の速度
-    [SerializeField] protected float moveDirection = 0; //弾丸の進む角度 0~359
-    [SerializeField] protected float timeToLive = 0; //消滅までの時間 0以下で消えない
-    [SerializeField] protected bool canPenetrate = false; //貫通するか
+    [SerializeField] private float moveSpeed = 0; //弾丸の速度
+    [SerializeField] private float moveDirection = 0; //弾丸の進む角度 0~359
+    [SerializeField] private float timeToLive = 0; //消滅までの時間 0以下で消えない
+    [SerializeField] private bool canPenetrate = false; //貫通するか
 
 
     /// <summary>

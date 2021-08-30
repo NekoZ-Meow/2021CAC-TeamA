@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        this.bullet = Resources.Load<GameObject>("Bullet/NormalBullet");
+        this.bullet = Bullets.normalBullet;
         this.shooting = new NormalShooting(this.gameObject, this.bullet);
         return;
     }
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         float rad = Mathf.Atan2(yAxis, xAxis);
         float xMove = this.moveSpeed * Mathf.Cos(rad);
         float yMove = this.moveSpeed * Mathf.Sin(rad);
-        this.transform.Translate(xMove, yMove, 0);
+        this.transform.Translate(xMove * Time.deltaTime, yMove*Time.deltaTime, 0);
 
         return;
     }
