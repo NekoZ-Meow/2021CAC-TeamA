@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  shotInterval: 0.1
+  shotInterval: 1
 --- !u!212 &290219736
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 1467228715}
     - target: {fileID: 4155585817440846735, guid: 435af2a6eb2d99c42b883b59b401d16c, type: 3}
       propertyPath: moveSpeed
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4155585817440846735, guid: 435af2a6eb2d99c42b883b59b401d16c, type: 3}
       propertyPath: homingDegree

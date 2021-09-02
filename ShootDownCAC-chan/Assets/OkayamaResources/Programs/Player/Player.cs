@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        this.bullet = Bullets.normalBullet;
+        this.bullet = Bullets.GetHomingBullet();
         this.shooting = new NormalShooting(this.gameObject, this.bullet);
         return;
     }
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         float rad = Mathf.Atan2(yAxis, xAxis);
         float xMove = this.moveSpeed * Mathf.Cos(rad);
         float yMove = this.moveSpeed * Mathf.Sin(rad);
-        this.transform.Translate(xMove * Time.deltaTime, yMove*Time.deltaTime, 0);
+        this.transform.Translate(xMove * Time.deltaTime, yMove * Time.deltaTime, 0);
 
         return;
     }
@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     {
         if (!this.isWaitInterval)
         {
+            this.shooting.Bullet.GetComponent<HomingBullet>().Target = GameObjectUtility.FindNearlyGameObjectWithTag(this.gameObject, "Enemy");
             this.shooting.Shoot();
             this.StartCoroutine(this.WaitInterval());
         }

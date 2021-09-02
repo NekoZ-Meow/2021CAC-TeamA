@@ -15,7 +15,7 @@ public class HomingBullet : Bullet
         float rad = base.MoveDirection * Mathf.Deg2Rad;
         float xMove = base.MoveSpeed * Mathf.Cos(rad);
         float yMove = base.MoveSpeed * Mathf.Sin(rad);
-        this.transform.position += new Vector3(xMove*Time.fixedDeltaTime, yMove*Time.fixedDeltaTime, 0);
+        this.transform.position += new Vector3(xMove * Time.fixedDeltaTime, yMove * Time.fixedDeltaTime, 0);
 
         return;
     }
@@ -25,13 +25,14 @@ public class HomingBullet : Bullet
     /// </summary>
     private void HormingTarget()
     {
+        Debug.Log(this.target);
         if (!target)
         {
             return;
         }
         Vector3 direction = this.target.transform.position - this.transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        Quaternion nextRotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, this.homingDegree*Time.fixedDeltaTime);
+        Quaternion nextRotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, this.homingDegree * Time.fixedDeltaTime);
         this.MoveDirection = nextRotation.eulerAngles.z;
 
         return;

@@ -28,7 +28,6 @@ public class GameObjectUtility
                 result = target;
             }
         }
-
         return result;
     }
 }
