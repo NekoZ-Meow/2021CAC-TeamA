@@ -1,13 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
     [SerializeField]
-    private int hp;
+    private float hp;
     [SerializeField]
-    private int damage;
+    private float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,5 +22,9 @@ public class EnemyStatus : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "PlayerAmmo") Destroy(gameObject);
+    }
+    public float getDamage()
+    {
+        return damage;
     }
 }
