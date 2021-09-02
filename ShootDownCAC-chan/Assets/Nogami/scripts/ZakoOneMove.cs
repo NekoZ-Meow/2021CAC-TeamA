@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,11 +19,10 @@ public class ZakoOneMove : MonoBehaviour
         Straightmove();
     }
     /// <summary>
-    /// âÊñ äOÇ©ÇÁíºêiÇ∑ÇÈ
+    /// ÁîªÈù¢Â§ñ„Åã„ÇâÁõ¥ÈÄ≤„Åô„Çã
     /// </summary>
     private void Straightmove()
     {
         this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - movespeed);
-        //this.gameObject.transform.position = Vector2.SmoothDamp(this.transform.position, firstposition, ref velocity, movespeed);
     }
 }

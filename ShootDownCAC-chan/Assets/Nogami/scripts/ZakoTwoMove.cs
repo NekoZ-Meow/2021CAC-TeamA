@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class ZakoTwoMove : MonoBehaviour
         Firstmove();
     }
     /// <summary>
-    /// ‰æ–ÊŠO‚©‚ç‰ŠúˆÊ’u‚ÉˆÚ“®‚·‚é
+    /// ç”»é¢å¤–ã‹ã‚‰åˆæœŸä½ç½®ã«ç§»å‹•ã™ã‚‹
     /// </summary>
     private void Firstmove()
     {
