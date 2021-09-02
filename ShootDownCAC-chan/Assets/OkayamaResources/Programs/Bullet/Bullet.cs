@@ -7,9 +7,10 @@ using UnityEngine;
 /// </summary>
 public abstract class Bullet : MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed = 0; //弾丸の速度
-    [SerializeField] protected float moveDirection = 0; //弾丸の進む角度 0~359
-    [SerializeField] protected float timeToLive = 0; //消滅までの時間
+    [SerializeField] private float moveSpeed = 0; //弾丸の速度
+    [SerializeField] private float moveDirection = 0; //弾丸の進む角度 0~359
+    [SerializeField] private float timeToLive = 0; //消滅までの時間 0以下で消えない
+    [SerializeField] private bool canPenetrate = false; //貫通するか
 
 
     /// <summary>
@@ -24,6 +25,7 @@ public abstract class Bullet : MonoBehaviour
     /// <param name="collider2D">衝突したオブジェクトのコライダー</param>
     public virtual void OnTriggerEnter2D(Collider2D collider2D)
     {
+        if (this.canPenetrate) return;
         this.DestroyThisObject();
         return;
     }
@@ -46,6 +48,8 @@ public abstract class Bullet : MonoBehaviour
         {
             this.StartCoroutine(TimeLimitCounter(this.timeToLive));
         }
+        Debug.Log(this.moveDirection);
+        this.transform.rotation = Quaternion.Euler(0, 0, this.moveDirection);
         return;
     }
 
@@ -63,7 +67,7 @@ public abstract class Bullet : MonoBehaviour
     /// <summary>
     /// 消滅までの時間分待ち、時間になったらこのオブジェクトを削除する
     /// </summary>
-    /// <param name="timeTolLive"></param>
+    /// <param name="timeTolLive">生存時間</param>
     /// <returns></returns>
     protected virtual IEnumerator TimeLimitCounter(float timeTolLive)
     {
@@ -81,7 +85,11 @@ public abstract class Bullet : MonoBehaviour
     public float MoveDirection
     {
         get { return this.moveDirection; }
-        set { this.moveDirection = value % 360; }
+        set
+        {
+            this.moveDirection = value % 360;
+            this.transform.rotation = Quaternion.Euler(0, 0, this.moveDirection);
+        }
     }
 
     /// <summary>
@@ -92,6 +100,26 @@ public abstract class Bullet : MonoBehaviour
     {
         get { return this.moveSpeed; }
         set { this.moveSpeed = value; }
+    }
+
+    /// <summary>
+    /// 消滅までの時間
+    /// </summary>
+    /// <value>時間</value>
+    public float TimeToLive
+    {
+        get { return this.timeToLive; }
+        set { this.timeToLive = value; }
+    }
+
+    /// <summary>
+    /// 貫通するか
+    /// </summary>
+    /// <value>貫通するか</value>
+    public bool CanPenetrate
+    {
+        get { return this.canPenetrate; }
+        set { this.canPenetrate = value; }
     }
 
 }
