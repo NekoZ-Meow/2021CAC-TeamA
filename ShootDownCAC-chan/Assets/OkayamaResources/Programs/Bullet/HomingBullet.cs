@@ -31,9 +31,10 @@ public class HomingBullet : Bullet
             return;
         }
         Vector3 direction = this.target.transform.position - this.transform.position;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        Quaternion nextRotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, this.homingDegree * Time.fixedDeltaTime);
-        this.MoveDirection = nextRotation.eulerAngles.z;
+
+        float targetDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float nextDirection = Mathf.MoveTowards(base.MoveDirection, targetDirection, this.homingDegree);
+        this.MoveDirection = nextDirection;
 
         return;
     }

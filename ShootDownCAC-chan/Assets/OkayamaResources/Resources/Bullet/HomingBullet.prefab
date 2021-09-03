@@ -127,4 +127,4 @@ MonoBehaviour:
   timeToLive: 0
   canPenetrate: 0
   target: {fileID: 0}
-  homingDegree: 1000
+  homingDegree: 5

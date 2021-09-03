@@ -17,7 +17,7 @@ public class NormalShooting : Shooting
         return;
     }
 
-    /*public override void Shoot()
+    public override void Shoot()
     {
         Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
 
