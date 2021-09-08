@@ -7,6 +7,10 @@ public class HomingBullet : Bullet
     [SerializeField] protected GameObject target = null; // 誘導対象
     [SerializeField] private float homingDegree = 5f; // 誘導角度
 
+    [SerializeField] private float waitHomingTime = 0f;//誘導までの時間
+
+    [SerializeField] private bool isHoming = true; //誘導するか
+
     /// <summary>
     /// このオブジェクトを指定した方向に指定したスピードで移動させる
     /// </summary>
@@ -25,7 +29,6 @@ public class HomingBullet : Bullet
     /// </summary>
     private void HormingTarget()
     {
-        Debug.Log(this.target);
         if (!target)
         {
             return;
@@ -33,10 +36,28 @@ public class HomingBullet : Bullet
         Vector3 direction = this.target.transform.position - this.transform.position;
 
         float targetDirection = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        float nextDirection = Mathf.MoveTowards(base.MoveDirection, targetDirection, this.homingDegree);
+        if (targetDirection < 0) targetDirection = 360 + targetDirection;
+        float nextDirection;
+        if (Mathf.Abs(targetDirection - this.MoveDirection) > 180)
+        {
+            targetDirection -= 360;
+        }
+        nextDirection = Mathf.MoveTowards(base.MoveDirection, targetDirection, this.homingDegree);
+
         this.MoveDirection = nextDirection;
 
         return;
+    }
+
+    /// <summary>
+    /// 一定時間後に誘導させる
+    /// </summary>
+    /// <returns></returns>
+    protected IEnumerator WaitHoming()
+    {
+        this.isHoming = false;
+        yield return new WaitForSeconds(this.waitHomingTime);
+        this.isHoming = true;
     }
 
     /// <summary>
@@ -45,6 +66,10 @@ public class HomingBullet : Bullet
     protected override void Start()
     {
         base.Start();
+        if (this.waitHomingTime > 0)
+        {
+            StartCoroutine(this.WaitHoming());
+        }
 
         return;
     }
@@ -54,7 +79,7 @@ public class HomingBullet : Bullet
     /// </summary>
     void FixedUpdate()
     {
-        this.HormingTarget();
+        if (this.isHoming) this.HormingTarget();
         this.Move();
 
         return;
@@ -78,5 +103,17 @@ public class HomingBullet : Bullet
     {
         get { return this.homingDegree; }
         set { this.homingDegree = value; }
+    }
+
+    public bool IsHoming
+    {
+        get { return this.isHoming; }
+        set { this.isHoming = value; }
+    }
+
+    public float WaitHomingTime
+    {
+        get { return this.waitHomingTime; }
+        set { this.waitHomingTime = value; }
     }
 }
