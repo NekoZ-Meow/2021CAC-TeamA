@@ -49,7 +49,7 @@ public abstract class Bullet : MonoBehaviour
         {
             this.StartCoroutine(TimeLimitCounter(this.timeToLive));
         }
-        this.transform.rotation = Quaternion.Euler(0, 0, this.moveDirection);
+        this.MoveDirection = this.transform.rotation.eulerAngles.z;
         return;
     }
 
