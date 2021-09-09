@@ -1,3 +1,13 @@
+<<<<<<< HEAD:ShootDownCAC-chan/Library/PackageCache/com.unity.2d.animation@5.0.6/Editor/Assets/LayoutOverlay.meta
+fileFormatVersion: 2
+guid: 4817dc4ea8764f74298414d8ac0bb8d5
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
 fileFormatVersion: 2
 guid: 9277c06718764934cb04416d1709dcee
 folderAsset: yes
@@ -6,3 +16,4 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+>>>>>>> 125e3a136d95abc0867834ae875e638d6cd810ce:ShootDownCAC-chan/Assets/OkayamaResources/Programs.meta
