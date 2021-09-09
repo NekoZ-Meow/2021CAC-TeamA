@@ -8,10 +8,12 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private float intervaltime;
     private float damage;
+    private Shooting shooting;
     // Start is called before the first frame update
     void Start()
     {
         this.damage = this.GetComponent<EnemyStatus>().getDamage();
+        this.shooting = new NormalBullet(this.gameObject, bullet);
     }
 
     // Update is called once per frame
@@ -21,7 +23,7 @@ public class EnemyAttack : MonoBehaviour
         if(intervaltime <= time)
         {
             time = 0;
-            Debug.Log(damage);
+            this.shooting.Shoot();
         }
     }
 }

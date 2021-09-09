@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CircleShooting : Shooting
 {
-    public CircleShooting(GameObject shooter, GameObject bullet)
+    public CircleShooting(GameObject shooter, Bullet bullet) : base(shooter, bullet)
     {
-        if (!bullet.GetComponent<Bullet>())
-        {
-            throw new MissingComponentException();
-        }
-        base.shooter = shooter;
-        base.Bullet = bullet;
-
         return;
     }
 
