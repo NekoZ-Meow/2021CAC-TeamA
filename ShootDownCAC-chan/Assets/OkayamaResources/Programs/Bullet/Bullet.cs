@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Bullet : MonoBehaviour
 {
+    [SerializeField] private float damage = 0; //弾丸のダメージ
     [SerializeField] private float moveSpeed = 0; //弾丸の速度
     [SerializeField] private float moveDirection = 0; //弾丸の進む角度 0~359
     [SerializeField] private float timeToLive = 0; //消滅までの時間 0以下で消えない
@@ -48,7 +49,6 @@ public abstract class Bullet : MonoBehaviour
         {
             this.StartCoroutine(TimeLimitCounter(this.timeToLive));
         }
-        Debug.Log(this.moveDirection);
         this.transform.rotation = Quaternion.Euler(0, 0, this.moveDirection);
         return;
     }
@@ -76,6 +76,16 @@ public abstract class Bullet : MonoBehaviour
         this.DestroyThisObject();
 
         yield break;
+    }
+
+    /// <summary>
+    /// 弾丸のダメージ
+    /// </summary>
+    /// <value>ダメージ</value>
+    public float Damage
+    {
+        get { return this.damage; }
+        set { this.damage = value; }
     }
 
     /// <summary>

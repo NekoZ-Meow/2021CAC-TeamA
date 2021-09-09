@@ -9,14 +9,14 @@ public class Player : MonoBehaviour
 
     private bool isWaitInterval = false;
 
-    private GameObject bullet;
+    private Bullet bullet;
 
     private Shooting shooting;
+
     // Start is called before the first frame update
     private void Start()
     {
-        this.bullet = Bullets.GetHomingBullet();
-        this.shooting = new NormalShooting(this.gameObject, this.bullet);
+        this.shooting = new DoubleNormalShooting(this.gameObject, Bullets.GetNormalBullet(10, 20));
         return;
     }
 
@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
         float rad = Mathf.Atan2(yAxis, xAxis);
         float xMove = this.moveSpeed * Mathf.Cos(rad);
         float yMove = this.moveSpeed * Mathf.Sin(rad);
-        this.transform.Translate(xMove * Time.deltaTime, yMove * Time.deltaTime, 0);
-
+        Vector2 movedPosition = this.transform.position + new Vector3(xMove * Time.deltaTime, yMove * Time.deltaTime, 0);
+        if (!(Areas.SCREEN_AREA.topLeft.x <= movedPosition.x && movedPosition.x <= Areas.SCREEN_AREA.bottomRight.x)) xMove = 0;
+        if (!(Areas.SCREEN_AREA.bottomRight.y <= movedPosition.y && movedPosition.y <= Areas.SCREEN_AREA.topLeft.y)) yMove = 0;
+        this.transform.position += new Vector3(xMove * Time.deltaTime, yMove * Time.deltaTime, 0);
         return;
     }
 
@@ -38,8 +40,8 @@ public class Player : MonoBehaviour
     {
         if (!this.isWaitInterval)
         {
-            this.shooting.Bullet.GetComponent<HomingBullet>().Target = GameObjectUtility.FindNearlyGameObjectWithTag(this.gameObject, "Enemy");
             this.shooting.Shoot();
+            //Instantiate(this.bullet, this.transform.position, this.transform.rotation);
             this.StartCoroutine(this.WaitInterval());
         }
         return;
@@ -53,12 +55,25 @@ public class Player : MonoBehaviour
         yield break;
     }
 
+    private void ChangeShooting()
+    {
+        if (this.shooting.GetType() == typeof(MultiHomingShooting))
+        {
+            return;
+        }
+        this.shooting = new MultiHomingShooting(this.gameObject, Bullets.GetHomingBullet(5, 15, 0, 15), 3);
+    }
+
 
     // Update is called once per frame
     private void Update()
     {
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
+        if (Input.GetKey(KeyCode.R))
+        {
+            this.ChangeShooting();
+        }
         if (Input.GetButton("Shot"))
         {
             this.Shot();

@@ -4,9 +4,17 @@ using UnityEngine;
 
 public abstract class Shooting
 {
-    protected GameObject bullet; //発射する弾丸
+    protected Bullet bullet; //発射する弾丸
 
     protected GameObject shooter; //射手
+
+    public Shooting(GameObject shooter, Bullet bullet)
+    {
+        this.bullet = bullet;
+        this.shooter = shooter;
+
+        return;
+    }
 
     /// <summary>
     /// 弾丸を発射する
@@ -17,7 +25,7 @@ public abstract class Shooting
     /// 発射する弾丸
     /// </summary>
     /// <value>弾丸のオブジェクト</value>
-    public GameObject Bullet
+    public Bullet Bullet
     {
         get { return this.bullet; }
         set

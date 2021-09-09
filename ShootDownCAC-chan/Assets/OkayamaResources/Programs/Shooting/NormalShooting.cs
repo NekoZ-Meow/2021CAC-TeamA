@@ -5,21 +5,15 @@ using UnityEngine;
 public class NormalShooting : Shooting
 {
 
-    public NormalShooting(GameObject shooter, GameObject bullet)
+    public NormalShooting(GameObject shooter, Bullet bullet) : base(shooter, bullet)
     {
-        if (!bullet.GetComponent<Bullet>())
-        {
-            throw new MissingComponentException();
-        }
-        base.shooter = shooter;
-        base.Bullet = bullet;
-
         return;
     }
 
-    /*public override void Shoot()
+    public override void Shoot()
     {
-        Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
+        Bullet bullet = Object.Instantiate<Bullet>(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
+        bullet.enabled = true;
 
         return;
     }

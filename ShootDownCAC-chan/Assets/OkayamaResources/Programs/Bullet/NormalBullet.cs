@@ -16,7 +16,7 @@ public class NormalBullet : Bullet
         float rad = base.MoveDirection * Mathf.Deg2Rad;
         float xMove = base.MoveSpeed * Mathf.Cos(rad);
         float yMove = base.MoveSpeed * Mathf.Sin(rad);
-        this.transform.position += new Vector3(xMove*Time.fixedDeltaTime, yMove*Time.fixedDeltaTime, 0);
+        this.transform.position += new Vector3(xMove * Time.fixedDeltaTime, yMove * Time.fixedDeltaTime, 0);
 
         return;
     }
