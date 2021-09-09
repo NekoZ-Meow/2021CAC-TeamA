@@ -8,6 +8,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private float intervaltime;
     private float damage;
+    private Shooting shooting;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class EnemyAttack : MonoBehaviour
         if(intervaltime <= time)
         {
             time = 0;
-            Debug.Log(damage);
+            this.shooting.Shoot();
         }
     }
 }

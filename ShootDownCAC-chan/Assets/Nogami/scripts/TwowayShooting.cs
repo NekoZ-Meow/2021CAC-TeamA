@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class TwowayShooting : Shooting
 {
-    public TwowayShooting(GameObject shooter, GameObject bullet)
+    public TwowayShooting(GameObject shooter, Bullet bullet) : base(shooter, bullet)
     {
-        if (!bullet.GetComponent<Bullet>())
-        {
-            throw new MissingComponentException();
-        }
-        base.shooter = shooter;
-        base.Bullet = bullet;
-
         return;
     }
 
@@ -22,6 +15,7 @@ public class TwowayShooting : Shooting
         Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
         this.Bullet.GetComponent<Bullet>().MoveDirection = 315;
         Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
+        bullet.enabled = true;
 
         return;
     }
