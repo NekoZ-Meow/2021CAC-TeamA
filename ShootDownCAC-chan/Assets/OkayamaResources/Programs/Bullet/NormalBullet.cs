@@ -13,10 +13,10 @@ public class NormalBullet : Bullet
     /// </summary>
     protected override void Move()
     {
-        float rad = base.moveDirection * Mathf.Deg2Rad;
-        float xMove = base.moveSpeed * Mathf.Cos(rad);
-        float yMove = base.moveSpeed * Mathf.Sin(rad);
-        this.transform.Translate(xMove, yMove, 0);
+        float rad = base.MoveDirection * Mathf.Deg2Rad;
+        float xMove = base.MoveSpeed * Mathf.Cos(rad);
+        float yMove = base.MoveSpeed * Mathf.Sin(rad);
+        this.transform.position += new Vector3(xMove * Time.fixedDeltaTime, yMove * Time.fixedDeltaTime, 0);
 
         return;
     }
@@ -27,6 +27,8 @@ public class NormalBullet : Bullet
     protected override void Start()
     {
         base.Start();
+
+        return;
     }
 
     /// <summary>
@@ -35,5 +37,7 @@ public class NormalBullet : Bullet
     void FixedUpdate()
     {
         this.Move();
+
+        return;
     }
 }
