@@ -12,6 +12,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private bool canShoot = true;
     [SerializeField] private Shooting shooting;
     [SerializeField] private BoxArea playerMovableArea;
+    public int score { get; set; } = 0; //消す！！
     private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
