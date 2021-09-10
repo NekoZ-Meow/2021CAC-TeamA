@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 複数の敵に対して誘導する射撃システム
@@ -8,12 +9,14 @@ using UnityEngine;
 public class MultiHomingShooting : Shooting
 {
     private HomingBullet homingBullet;
+    private string targetTag;
     private int targetNumber;
     private float maxDegree;
     private float waitTime;
-    public MultiHomingShooting(GameObject shooter, HomingBullet bullet, int targetNumber = 1, float maxDegree = 60, float waitTime = 0.15f) : base(shooter, bullet)
+    public MultiHomingShooting(GameObject shooter, HomingBullet bullet, string targetTag, int targetNumber = 1, float maxDegree = 60, float waitTime = 0.15f, float maxDistance = -1) : base(shooter, bullet)
     {
         this.homingBullet = bullet;
+        this.targetTag = targetTag;
         this.targetNumber = targetNumber;
         this.maxDegree = maxDegree;
         this.waitTime = waitTime;
@@ -23,7 +26,7 @@ public class MultiHomingShooting : Shooting
     public override void Shoot()
     {
         List<Bullet> bullets = new List<Bullet>();
-        List<GameObject> enemies = GameObjectUtility.FindNearlyNGameObjectsWithTag(this.shooter, Tags.ENEMY, this.targetNumber);
+        List<GameObject> enemies = GameObjectUtility.FindNearlyNGameObjectsWithTag(this.shooter, this.targetTag, this.targetNumber);
         enemies.ForEach((aGameObject) =>
         {
             HomingBullet bullet = Object.Instantiate<HomingBullet>(this.homingBullet, base.shooter.transform.position, shooter.transform.rotation);
