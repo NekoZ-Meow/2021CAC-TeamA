@@ -1,5 +1,6 @@
 
 public class Areas
 {
-    public static BoxArea SCREEN_AREA = AreaUtility.GetScreenArea();
+    public static readonly BoxArea SCREEN_AREA = AreaUtility.GetScreenArea();
+
 }

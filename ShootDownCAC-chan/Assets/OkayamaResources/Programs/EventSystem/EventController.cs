@@ -17,9 +17,15 @@ public class EventController : MonoBehaviour
 
     void Start()
     {
-        this.AddEvent(new SpawnEnemyEvent("敵生成"));
-        this.events.Add(new WaitUntilAllEnemiesAreDestroyed());
-        this.events.Add(new TestEvent("テスト1"));
+        GameObject enemy = Resources.Load<GameObject>("Enemy/TestEnemy");
+        this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
+        this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
+        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 180, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 3), speed: 2.5f));
+        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 0, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 5, 1), speed: 2.5f));
+        this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
+        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 330, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 3, 5), speed: 2));
+        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 210, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 4), speed: 2));
+        this.AddEvent(new TestEvent("テスト1"));
         this.Play();
         return;
     }

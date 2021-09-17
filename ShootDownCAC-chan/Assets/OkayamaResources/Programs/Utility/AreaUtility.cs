@@ -22,6 +22,17 @@ public static class AreaUtility
     }
 
     /// <summary>
+    /// メニューを含まない画面の大きさ
+    /// </summary>
+    /// <returns></returns>
+    public static BoxArea GetPlayableArea()
+    {
+        BoxArea result = Areas.SCREEN_AREA.Copy();
+        result.ChangeWidth(result.GetWidth() * 0.7f);
+        return result;
+    }
+
+    /// <summary>
     /// min<=value<=maxが成り立つかどうか
     /// </summary>
     /// <param name="value">値</param>

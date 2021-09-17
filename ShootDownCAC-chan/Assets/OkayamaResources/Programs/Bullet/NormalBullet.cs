@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 直進する弾丸を表すクラス
 /// </summary>
+[System.Serializable]
 public class NormalBullet : Bullet
 {
 

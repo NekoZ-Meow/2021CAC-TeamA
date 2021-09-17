@@ -17,9 +17,9 @@ public class DoubleNormalShooting : Shooting
         bullet.enabled = true;
         bullet = Object.Instantiate<Bullet>(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
         bullet.transform.position -= new Vector3(0.2f, 0, 0);
+        this.PlaySound();
         bullet.enabled = true;
         return;
     }
-
 
 }

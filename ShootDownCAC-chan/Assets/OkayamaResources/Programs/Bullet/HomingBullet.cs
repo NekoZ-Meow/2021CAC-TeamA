@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class HomingBullet : Bullet
 {
     [SerializeField] protected GameObject target = null; // 誘導対象

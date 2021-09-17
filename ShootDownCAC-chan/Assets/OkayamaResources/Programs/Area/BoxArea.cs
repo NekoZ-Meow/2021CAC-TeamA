@@ -8,8 +8,8 @@ using UnityEngine;
 [System.Serializable]
 public class BoxArea
 {
-    [SerializeField] public Vector2 topLeft = Vector2.zero;
-    [SerializeField] public Vector2 bottomRight = Vector2.zero;
+    [SerializeField] private Vector2 topLeft = Vector2.zero;
+    [SerializeField] private Vector2 bottomRight = Vector2.zero;
 
     /// <summary>
     /// コンストラクタ
@@ -30,6 +30,26 @@ public class BoxArea
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
 
+        return;
+    }
+
+    /// <summary>
+    /// 指定した幅になるように右下の座標を変更する
+    /// </summary>
+    /// <param name="width">幅</param>
+    public void ChangeWidth(float width)
+    {
+        this.bottomRight.x = this.topLeft.x + width;
+        return;
+    }
+
+    /// <summary>
+    /// 指定した幅になるように右下の座標を変更する
+    /// </summary>
+    /// <param name="height">幅</param>
+    public void ChangeHeight(float height)
+    {
+        this.bottomRight.y = this.topLeft.y - height;
         return;
     }
 
@@ -70,6 +90,30 @@ public class BoxArea
     {
         return (this.topLeft.x <= position.x && position.x <= this.bottomRight.x) &&
             (this.bottomRight.y <= position.y && position.y <= this.topLeft.y);
+    }
+
+    /// <summary>
+    /// 領域を移動させる
+    /// </summary>
+    /// <param name="x">x軸の移動量</param>
+    /// <param name="y">y軸の移動量</param>
+    public void Transform(float x, float y)
+    {
+        this.topLeft.x += x;
+        this.bottomRight.x += x;
+        this.topLeft.y += y;
+        this.bottomRight.y += y;
+
+        return;
+    }
+
+    /// <summary>
+    /// このエリアのコピーを返す
+    /// <summary>
+    /// <returns>エリアのコピー</returns>
+    public BoxArea Copy()
+    {
+        return new BoxArea(this.topLeft, this.bottomRight);
     }
 
     public Vector2 TopLeft
