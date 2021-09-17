@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +11,11 @@ public class TwowayShooting : Shooting
 
     public override void Shoot()
     {
-        this.Bullet.GetComponent<Bullet>().MoveDirection = 225;
-        Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
-        this.Bullet.GetComponent<Bullet>().MoveDirection = 315;
-        Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
+        Bullet bullet = Object.Instantiate(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
+        bullet.MoveDirection -= 45;
+        bullet.enabled = true;
+        bullet = Object.Instantiate(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
+        bullet.MoveDirection += 90;
         bullet.enabled = true;
 
         return;

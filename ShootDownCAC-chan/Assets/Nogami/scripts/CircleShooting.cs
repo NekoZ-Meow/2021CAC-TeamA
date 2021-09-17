@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +13,9 @@ public class CircleShooting : Shooting
     {
         for(int i = 0;i < 360; i += 15)
         {
-            this.Bullet.GetComponent<Bullet>().MoveDirection = i;
-            Object.Instantiate(base.bullet, base.shooter.transform.position, Quaternion.identity);
+            Bullet bullet = Object.Instantiate(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
+            bullet.MoveDirection = i;
+            bullet.enabled = true;
         }
 
         return;

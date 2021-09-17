@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZakoTwoMove : MonoBehaviour
+public class MoveTypeOne : MonoBehaviour
 {
     [SerializeField]
     private float movespeed;
-    [SerializeField]
-    private Vector2 firstposition;
     private Vector2 velocity = Vector2.zero;
     // Start is called before the first frame update
     void Start()
@@ -18,13 +16,13 @@ public class ZakoTwoMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Firstmove();
+        Straightmove();
     }
     /// <summary>
-    /// 画面外から初期位置に移動する
+    /// 画面外から直進する
     /// </summary>
-    private void Firstmove()
+    private void Straightmove()
     {
-        this.gameObject.transform.position = Vector2.SmoothDamp(this.transform.position, firstposition, ref velocity, movespeed);
+        this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - movespeed);
     }
 }
