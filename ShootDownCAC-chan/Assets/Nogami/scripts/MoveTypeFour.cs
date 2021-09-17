@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ public class MoveTypeFour : MonoBehaviour
         }
     }
     /// <summary>
-    /// ‰æ–ÊŠO‚©‚ç‰ŠúˆÊ’u‚ÉˆÚ“®‚·‚é
+    /// ç”»é¢å¤–ã‹ã‚‰åˆæœŸä½ç½®ã«ç§»å‹•ã™ã‚‹
     /// </summary>
     private void Firstmove()
     {
@@ -43,7 +43,7 @@ public class MoveTypeFour : MonoBehaviour
         if (this.gameObject.transform.position.y - 0.5f <= firstposition.y) endfirstmove = false;
     }
     /// <summary>
-    /// w’è‚µ‚½ˆÊ’u‚ğ‡”Ô‚ÉˆÚ“®‚·‚é
+    /// æŒ‡å®šã—ãŸä½ç½®ã‚’é †ç•ªã«ç§»å‹•ã™ã‚‹
     /// </summary>
     private void Secondmove()
     {
