@@ -13,6 +13,7 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         this.damage = this.GetComponent<EnemyStatus>().getDamage();
+        this.shooting = new ThreewayShooting(this.gameObject, Bullets.GetNormalBullet(10, 20));
     }
 
     // Update is called once per frame
