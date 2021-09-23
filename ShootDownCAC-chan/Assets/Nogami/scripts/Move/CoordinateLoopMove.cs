@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MoveTypeThree : MonoBehaviour
+/// <summary>
+/// 指定した座標をひたすら回る
+/// </summary>
+public class CoordinateLoopMove : MonoBehaviour
 {
     [SerializeField]
     private float firstmovespeed;
@@ -15,6 +17,7 @@ public class MoveTypeThree : MonoBehaviour
     private Vector2 velocity = Vector2.zero;
     private bool endfirstmove = true;
     private int movecount = 0;
+    private bool countup = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,22 +41,21 @@ public class MoveTypeThree : MonoBehaviour
     /// </summary>
     private void Firstmove()
     {
-        this.gameObject.transform.position = Vector2.SmoothDamp(this.transform.position, firstposition, ref velocity, firstmovespeed);
+        this.gameObject.transform.position = Vector2.SmoothDamp(this.transform.position, firstposition, ref velocity, firstmovespeed * Time.fixedDeltaTime);
         if (this.gameObject.transform.position.y - 0.5f <= firstposition.y) endfirstmove = false;
     }
     /// <summary>
-    /// 指定した位置を順番に移動したのち直線に移動する
+    /// 指定した位置を順番に移動する
     /// </summary>
     private void Secondmove()
     {
-        if(movecount < secondposition.Count)
+        this.gameObject.transform.position = Vector2.MoveTowards(this.gameObject.transform.position, secondposition[movecount], secondmovespeed * Time.fixedDeltaTime);
+        if (this.gameObject.transform.position.Equals(secondposition[movecount]))
         {
-            this.gameObject.transform.position = Vector2.MoveTowards(this.gameObject.transform.position, secondposition[movecount], secondmovespeed);
-            if (this.gameObject.transform.position.Equals(secondposition[movecount])) movecount++;
-        }
-        else
-        {
-            this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - secondmovespeed);
-        }
+            if (countup == true) movecount++;
+            else movecount--;
+            if (movecount == secondposition.Count - 1) countup = false;
+            else if (movecount == 0) countup = true;
+        } 
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MoveTypeTwo : MonoBehaviour
+/// <summary>
+/// /指定したx座標を交互に斜め移動をしながら進む
+/// </summary>
+public class DiagonalMove : MonoBehaviour
 {
     [SerializeField]
     private float firstmovespeed;
@@ -40,7 +42,7 @@ public class MoveTypeTwo : MonoBehaviour
     /// </summary>
     private void Firstmove()
     {
-        this.gameObject.transform.position = Vector2.SmoothDamp(this.transform.position, firstposition, ref velocity, firstmovespeed);
+        this.gameObject.transform.position = Vector2.SmoothDamp(this.transform.position, firstposition, ref velocity, firstmovespeed * Time.fixedDeltaTime);
         if (this.gameObject.transform.position.y - 0.5f <= firstposition.y) endfirstmove = false;
     }
     /// <summary>
@@ -50,12 +52,12 @@ public class MoveTypeTwo : MonoBehaviour
     {
         if(boolonex == true)
         {
-            this.gameObject.transform.position = new Vector2(this.transform.position.x + secondmovespeed, this.transform.position.y - secondmovespeed / 5f);
+            this.gameObject.transform.position = new Vector2(this.transform.position.x + (secondmovespeed * Time.fixedDeltaTime), this.transform.position.y - (secondmovespeed * Time.fixedDeltaTime) / 5f);
             if (this.gameObject.transform.position.x >= plusxposition) boolonex = false;
         }
         else
         {
-            this.gameObject.transform.position = new Vector2(this.transform.position.x - secondmovespeed, this.transform.position.y - secondmovespeed / 5f);
+            this.gameObject.transform.position = new Vector2(this.transform.position.x - (secondmovespeed * Time.fixedDeltaTime), this.transform.position.y - (secondmovespeed * Time.fixedDeltaTime) / 5f);
             if (this.gameObject.transform.position.x <= minusxposition) boolonex = true;
         }
     }

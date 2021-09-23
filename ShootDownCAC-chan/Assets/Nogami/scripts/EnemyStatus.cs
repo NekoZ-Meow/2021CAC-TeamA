@@ -21,7 +21,7 @@ public class EnemyStatus : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerAmmo") Destroy(gameObject);
+        if (collision.tag == Tags.PLAYER_BULLET) Destroy(gameObject);
     }
     public float getDamage()
     {

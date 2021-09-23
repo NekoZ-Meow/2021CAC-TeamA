@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TwowayShooting : Shooting
+public class ThreewayShooting : Shooting
 {
-    public TwowayShooting(GameObject shooter, Bullet bullet) : base(shooter, bullet)
+    public ThreewayShooting(GameObject shooter, Bullet bullet) : base(shooter, bullet)
     {
         return;
     }
@@ -12,13 +12,14 @@ public class TwowayShooting : Shooting
     public override void Shoot()
     {
         Bullet bullet = Object.Instantiate(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
-        bullet.MoveDirection -= 45;
+        bullet.MoveDirection -= 135;
         bullet.enabled = true;
         bullet = Object.Instantiate(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
-        bullet.MoveDirection += 90;
+        bullet.enabled = true;
+        bullet = Object.Instantiate(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
+        bullet.MoveDirection += 135;
         bullet.enabled = true;
 
         return;
     }
-
 }

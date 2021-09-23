@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class EnemyAttack : MonoBehaviour
+/// <summary>
+/// 円状に攻撃を行うタイミングを設定する
+/// </summary>
+public class EnemyCircleAttack : MonoBehaviour
 {
     private float time = 0;
     [SerializeField]
@@ -13,14 +15,14 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         this.damage = this.GetComponent<EnemyStatus>().getDamage();
-        this.shooting = new ThreewayShooting(this.gameObject, Bullets.GetNormalBullet(10, 20));
+        this.shooting = new CircleShooting(this.gameObject, Bullets.GetNormalBullet(10, 20));
     }
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
-        if(intervaltime <= time)
+        if (intervaltime <= time)
         {
             time = 0;
             this.shooting.Shoot();
