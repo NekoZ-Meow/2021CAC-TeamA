@@ -62,6 +62,18 @@ public class PlayerController : MonoBehaviour
     {
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+
+            this.gameManager.SetPause(!this.gameManager.IsPause);
+            this.uIController.SwitchOption();
+
+        }
+
+        if (this.gameManager.IsPause)
+        {
+            return;
+        }
         if (Input.GetButton("Shot"))
         {
             this.Shot();
@@ -74,13 +86,7 @@ public class PlayerController : MonoBehaviour
         {
             this.shootingController.ChangeShootingSystem(PlayerShooting.Normal);
         }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
 
-            this.gameManager.SetPause(!this.gameManager.IsPause);
-            this.uIController.SwitchOption();
-
-        }
         this.Move(xAxis, yAxis);
     }
 }

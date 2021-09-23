@@ -78,4 +78,9 @@ public class PlayerStatus : MonoBehaviour
     {
         get { return this.playerMovableArea; }
     }
+
+    public GameManager GameManager
+    {
+        get { return this.gameManager; }
+    }
 }
