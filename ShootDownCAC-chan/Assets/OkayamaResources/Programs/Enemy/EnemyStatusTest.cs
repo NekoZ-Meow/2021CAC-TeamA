@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 敵のステータス
+/// </summary>
 public class EnemyStatusTest : MonoBehaviour
 {
     [SerializeField] private float hp = 100;

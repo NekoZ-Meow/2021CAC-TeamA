@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - EventController
   - UIController
+  - GameManager
   layers:
   - Default
   - TransparentFX

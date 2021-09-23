@@ -11,4 +11,6 @@ public static class Tags
     public static readonly string EVENT_CONTROLLER = "EventController"; //イベントコントローラ
     public static readonly string UI_CONTROLLER = "UIController"; //プレイヤーUI
 
+    public static readonly string GAME_MANAGER = "GameManager";//ゲームマネージャ
+
 }

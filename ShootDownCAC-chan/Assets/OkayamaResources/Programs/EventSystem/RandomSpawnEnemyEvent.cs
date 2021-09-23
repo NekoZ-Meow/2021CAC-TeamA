@@ -5,11 +5,12 @@ using UnityEngine;
 /// <summary>
 /// ランダムに敵を生成するイベント
 /// </summary>
+[System.Serializable]
 public class RandomSpawnEnemyEvent : Event
 {
-    private GameObject enemy;
-    private float enemySpeed;
-    private float spawnInterval;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private float enemySpeed;
+    [SerializeField] private float spawnInterval;
     public RandomSpawnEnemyEvent(GameObject enemy, string name = "ランダム敵生成",
     int enemyNumber = 10, float enemySpeed = 1.5f, float spawnInterval = 1)
     {

@@ -15,13 +15,16 @@ public class PlayerStatus : MonoBehaviour
     public int score { get; set; } = 0; //消す！！
     private SpriteRenderer spriteRenderer;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+        this.gameManager = this.GetComponent<GameManager>();
         Vector3 imageSize = this.spriteRenderer.bounds.size;
-        this.playerMovableArea = Areas.SCREEN_AREA;
-        this.playerMovableArea.ChangeWidth(this.playerMovableArea.GetWidth() * 0.7f - imageSize.x);
+        this.playerMovableArea = AreaUtility.GetPlayableArea();
+        this.playerMovableArea.ChangeWidth(this.playerMovableArea.GetWidth() - imageSize.x);
         this.playerMovableArea.ChangeHeight(this.playerMovableArea.GetHeight() - imageSize.y);
         this.playerMovableArea.Transform(imageSize.x / 2, -imageSize.y / 2);
 

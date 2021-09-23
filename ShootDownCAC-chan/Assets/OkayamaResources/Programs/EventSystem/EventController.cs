@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 /// <summary>
 /// イベントの実行を管理するクラス
 /// 
@@ -10,7 +10,7 @@ using UnityEngine;
 public class EventController : MonoBehaviour
 {
     [SerializeField] private bool isPlaying = false; // 現在再生中か
-    [SerializeReference] List<Event> events = new List<Event>(); // イベント
+    [SerializeReference] private List<Event> events = new List<Event>(); // イベント
     [SerializeField] private int nowIndex = 0; // 現在のインデックス
     private IEnumerator nowRoutine = null; // 現在のルーチン
 
@@ -18,6 +18,7 @@ public class EventController : MonoBehaviour
     void Start()
     {
         GameObject enemy = Resources.Load<GameObject>("Enemy/TestEnemy");
+        this.AddEvent(new ShowStageTitle("ステージ1"));
         this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
         this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
         this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 180, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 3), speed: 2.5f));
