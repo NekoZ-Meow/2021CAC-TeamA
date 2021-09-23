@@ -8,11 +8,16 @@ public class PlayerController : MonoBehaviour
     private PlayerStatus playerStatus;
     private PlayerShootingController shootingController;
 
+    private GameManager gameManager;
+    private UIController uIController;
+
     // Start is called before the first frame update
     private void Start()
     {
         this.playerStatus = this.GetComponent<PlayerStatus>();
         this.shootingController = this.GetComponent<PlayerShootingController>();
+        this.uIController = GameObject.FindWithTag(Tags.UI_CONTROLLER).GetComponent<UIController>();
+        this.gameManager = GameObject.FindWithTag(Tags.GAME_MANAGER).GetComponent<GameManager>();
         return;
     }
 
@@ -57,6 +62,18 @@ public class PlayerController : MonoBehaviour
     {
         float xAxis = Input.GetAxis("Horizontal");
         float yAxis = Input.GetAxis("Vertical");
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+
+            this.gameManager.SetPause(!this.gameManager.IsPause);
+            this.uIController.SwitchOption();
+
+        }
+
+        if (this.gameManager.IsPause)
+        {
+            return;
+        }
         if (Input.GetButton("Shot"))
         {
             this.Shot();
