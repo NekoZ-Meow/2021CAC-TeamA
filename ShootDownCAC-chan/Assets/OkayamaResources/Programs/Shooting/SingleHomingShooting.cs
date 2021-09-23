@@ -9,16 +9,18 @@ public class SingleHomingShooting : Shooting
 {
     private HomingBullet homingBullet;
     private GameObject target;
-    public SingleHomingShooting(GameObject shooter, HomingBullet bullet) : base(shooter, bullet)
+    private string targetTag;
+    public SingleHomingShooting(GameObject shooter, HomingBullet bullet, string targetTag) : base(shooter, bullet)
     {
         this.homingBullet = bullet;
+        this.targetTag = targetTag;
         return;
     }
 
     public override void Shoot()
     {
         HomingBullet bullet = Object.Instantiate<HomingBullet>(this.homingBullet, base.shooter.transform.position, shooter.transform.rotation);
-        this.target = GameObjectUtility.FindNearlyGameObjectWithTag(this.shooter, Tags.ENEMY);
+        this.target = GameObjectUtility.FindNearlyGameObjectWithTag(this.shooter, this.targetTag);
         bullet.Target = this.target;
         bullet.enabled = true;
 

@@ -10,6 +10,8 @@ public class EnemyStatusTest : MonoBehaviour
     {
         if (collision.tag == Tags.PLAYER_BULLET)
         {
+            int score = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStatus>().score += (int)collision.GetComponent<Bullet>().Damage;
+            GameObject.FindGameObjectWithTag(Tags.UI_CONTROLLER).GetComponent<UIController>().SetScoreValue(score);
             this.CauseDamage(collision.GetComponent<Bullet>().Damage);
         }
     }

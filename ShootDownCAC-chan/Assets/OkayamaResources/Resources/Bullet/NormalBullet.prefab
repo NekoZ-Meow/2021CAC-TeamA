@@ -127,3 +127,4 @@ MonoBehaviour:
   moveDirection: 90
   timeToLive: 0.5
   canPenetrate: 0
+  sound: {fileID: 8300000, guid: 672072f7c3b6f3d4bb0925c4e9bb43bb, type: 3}

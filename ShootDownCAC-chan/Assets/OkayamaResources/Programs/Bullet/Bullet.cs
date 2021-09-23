@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 弾丸を表すオブジェクトの抽象クラス
 /// </summary>
+[System.Serializable]
 public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] private float damage = 0; //弾丸のダメージ
@@ -12,6 +13,8 @@ public abstract class Bullet : MonoBehaviour
     [SerializeField] private float moveDirection = 0; //弾丸の進む角度 0~359
     [SerializeField] private float timeToLive = 0; //消滅までの時間 0以下で消えない
     [SerializeField] private bool canPenetrate = false; //貫通するか
+
+    [SerializeField] private AudioClip sound = null;
 
 
     /// <summary>
@@ -130,6 +133,11 @@ public abstract class Bullet : MonoBehaviour
     {
         get { return this.canPenetrate; }
         set { this.canPenetrate = value; }
+    }
+
+    public AudioClip Sound
+    {
+        get { return this.sound; }
     }
 
 }

@@ -14,12 +14,12 @@ public class GameObjectUtility
     /// <param name="centerObject">中心となるオブジェクト</param>
     /// <param name="tag">検索対象のタグ</param>
     /// <returns>最も近いオブジェクト</returns>
-    public static GameObject FindNearlyGameObjectWithTag(GameObject centerObject, string tag)
+    public static GameObject FindNearlyGameObjectWithTag(GameObject centerObject, string tag, float maxDistance = -1)
     {
         GameObject result = null;
         GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(tag);
 
-        float minDistance = float.MaxValue;
+        float minDistance = (maxDistance > 0) ? maxDistance : float.MaxValue;
 
         foreach (GameObject target in targetObjects)
         {
@@ -38,9 +38,11 @@ public class GameObjectUtility
     /// <param name="centerObject">中心となるオブジェクト</param>
     /// <param name="tag">検索対象のタグ</param>
     /// <returns>最も近いオブジェクト</returns>
-    public static List<GameObject> FindNearlyNGameObjectsWithTag(GameObject centerObject, string tag, int n = 1)
+    public static List<GameObject> FindNearlyNGameObjectsWithTag(GameObject centerObject, string tag, int n = 1, float maxDistance = -1)
     {
         List<GameObject> targetObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag(tag));
+        maxDistance = (maxDistance > 0) ? maxDistance : float.MaxValue;
+        targetObjects = targetObjects.FindAll(aGameObject => (GetDistance(centerObject, aGameObject) <= maxDistance));
         if (targetObjects.Count <= n)
         {
             return targetObjects;
@@ -55,10 +57,10 @@ public class GameObjectUtility
     /// <param name="targetObject">対象のオブジェクト</param>
     /// <param name="gameObjectList">検索対象のリスト</param>
     /// <returns></returns>
-    public static GameObject FindNearlyGameObjectInList(GameObject targetObject, List<GameObject> gameObjectList)
+    public static GameObject FindNearlyGameObjectInList(GameObject targetObject, List<GameObject> gameObjectList, float maxDistance = -1)
     {
         GameObject result = null;
-        float minDistance = float.MaxValue;
+        float minDistance = (maxDistance > 0) ? maxDistance : float.MaxValue;
         gameObjectList.ForEach((aGameObject) =>
         {
             float distance = (aGameObject.transform.position - targetObject.transform.position).magnitude;
