@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MoveTypeOne : MonoBehaviour
+/// <summary>
+/// 直線に移動する
+/// </summary>
+public class MoveStraight : MonoBehaviour
 {
     [SerializeField]
     private float movespeed;
@@ -14,7 +16,7 @@ public class MoveTypeOne : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Straightmove();
     }
@@ -23,6 +25,6 @@ public class MoveTypeOne : MonoBehaviour
     /// </summary>
     private void Straightmove()
     {
-        this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - movespeed);
+        this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y - movespeed * Time.fixedDeltaTime);
     }
 }
