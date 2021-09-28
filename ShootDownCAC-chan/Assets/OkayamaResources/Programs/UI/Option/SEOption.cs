@@ -8,29 +8,21 @@ public class SEOption : OptionBase
 {
     [SerializeField] private float volumeMax = 20; //デシベルなので注意
     [SerializeField] private float volumeMin = -80;//デシベルなので注意
-    private UIController uiController;
     private GameManager gameManager;
 
     private Slider seSlider;
 
     private bool isLongPress = false;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        this.uiController = GameObject.FindWithTag(Tags.UI_CONTROLLER).GetComponent<UIController>();
-        this.gameManager = GameObject.FindWithTag(Tags.GAME_MANAGER).GetComponent<GameManager>();
-        this.seSlider = this.gameObject.GetComponentInChildren<Slider>();
-        this.seSlider.maxValue = this.volumeMax;
-        this.seSlider.minValue = this.volumeMin;
-    }
-
     /// <summary>
     /// 初期化処理
     /// </summary>
     public override void initialize()
     {
+        this.gameManager = GameObject.FindWithTag(Tags.GAME_MANAGER).GetComponent<GameManager>();
+        this.seSlider = this.gameObject.GetComponentInChildren<Slider>();
+        this.seSlider.maxValue = this.volumeMax;
+        this.seSlider.minValue = this.volumeMin;
         this.seSlider.value = this.gameManager.SEVolume;
         return;
     }

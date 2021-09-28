@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float seVolume = 0; //デシベル注意
     [SerializeField] private bool isPause = false; //ポーズ中か
 
-    private GameManager instance;
+    private static GameManager instance;
 
     private void Awake()
     {

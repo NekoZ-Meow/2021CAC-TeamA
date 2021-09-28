@@ -13,6 +13,7 @@ public class NormalShooting : Shooting
 
     public override void Shoot()
     {
+        if (this.bullet == null) return;
         Bullet bullet = Object.Instantiate<Bullet>(base.bullet, base.shooter.transform.position, shooter.transform.rotation);
         bullet.enabled = true;
 

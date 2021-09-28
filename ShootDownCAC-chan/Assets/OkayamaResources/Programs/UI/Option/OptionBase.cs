@@ -8,11 +8,13 @@ using UnityEngine;
 public abstract class OptionBase : MonoBehaviour
 {
     protected IEnumerator routine;
+    protected OptionController controller;
     /// <summary>
     /// 選択された
     /// </summary>
-    public virtual void onSelected()
+    public virtual void onSelected(OptionController controller)
     {
+        this.controller = controller;
         this.routine = this.Routine();
         StartCoroutine(this.routine);
     }

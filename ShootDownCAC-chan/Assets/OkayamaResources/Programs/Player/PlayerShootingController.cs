@@ -35,6 +35,7 @@ public class PlayerShootingController : MonoBehaviour
         if (this.nowShooting == kindOfShooting) return;
         this.nowShooting = kindOfShooting;
         this.shootingAnimation.StopAnimation();
+        Object.Destroy(this.playerStatus.Shooting.Bullet.gameObject);
         switch (kindOfShooting)
         {
             case PlayerShooting.Normal:
