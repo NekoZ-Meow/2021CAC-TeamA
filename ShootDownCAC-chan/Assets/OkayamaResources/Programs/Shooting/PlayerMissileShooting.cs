@@ -31,6 +31,7 @@ public class PlayerMissileShooting : Shooting
         float offset = this.shooterWidth / 2.5f;
         foreach (GameObject aGameObject in enemies)
         {
+            if (this.bullet == null) break;
             HomingBullet bullet = Object.Instantiate<HomingBullet>(this.homingBullet, base.shooter.transform.position + new Vector3(offset, 0, 0), shooter.transform.rotation);
             bullet.Target = aGameObject;
             bullet.WaitHomingTime = this.waitTime;
@@ -42,5 +43,4 @@ public class PlayerMissileShooting : Shooting
         }
         return;
     }
-
 }

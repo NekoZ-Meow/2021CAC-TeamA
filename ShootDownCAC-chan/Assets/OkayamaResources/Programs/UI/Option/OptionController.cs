@@ -11,6 +11,8 @@ public class OptionController : MonoBehaviour
     [SerializeField] List<OptionBase> optionValues;
     [SerializeField] private GameObject selector;
 
+    [SerializeField] private bool isMovable = true; //セレクターが操作可能か
+
     private int selectorIndex = 0;
 
     private bool isLongPress = false;
@@ -19,7 +21,6 @@ public class OptionController : MonoBehaviour
     void Start()
     {
         this.optionValues.Sort((aGameObject, anotherGameObject) => -(int)(aGameObject.transform.position.y - anotherGameObject.transform.position.y));
-
     }
 
     /// <summary>
@@ -28,7 +29,9 @@ public class OptionController : MonoBehaviour
     private void OnEnable()
     {
         if (this.optionValues.Count == 0) return;
+        this.optionValues.ForEach((option) => option.initialize());
         this.selectorIndex = 0;
+        this.isMovable = true;
         this.ChangeOption(this.selectorIndex);
     }
 
@@ -46,9 +49,12 @@ public class OptionController : MonoBehaviour
     /// <param name="nextIndex">次のインデックス番号</param>
     private void ChangeOption(int nextIndex)
     {
-        this.selector.transform.position = new Vector3(this.selector.transform.position.x, this.optionValues[nextIndex].transform.position.y, this.selector.transform.position.z);
+        if (selector != null)
+        {
+            this.selector.transform.position = new Vector3(this.selector.transform.position.x, this.optionValues[nextIndex].transform.position.y, this.selector.transform.position.z);
+        }
         this.optionValues[this.selectorIndex].dispose();
-        this.optionValues[nextIndex].onSelected();
+        this.optionValues[nextIndex].onSelected(this);
         this.selectorIndex = nextIndex;
     }
 
@@ -97,7 +103,7 @@ public class OptionController : MonoBehaviour
     void Update()
     {
         float yInput = Input.GetAxisRaw("Vertical");
-        if (yInput != 0)
+        if (yInput != 0 && this.isMovable)
         {
             this.MoveSelector(yInput);
         }
@@ -105,6 +111,12 @@ public class OptionController : MonoBehaviour
         {
             this.isLongPress = false;
         }
+    }
+
+    public bool IsMovable
+    {
+        get { return this.isMovable; }
+        set { this.isMovable = value; }
     }
 }
 
