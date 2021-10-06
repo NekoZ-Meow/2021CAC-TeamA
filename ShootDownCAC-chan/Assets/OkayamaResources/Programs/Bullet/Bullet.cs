@@ -13,8 +13,10 @@ public abstract class Bullet : MonoBehaviour
     [SerializeField] private float moveDirection = 0; //弾丸の進む角度 0~359
     [SerializeField] private float timeToLive = 0; //消滅までの時間 0以下で消えない
     [SerializeField] private bool canPenetrate = false; //貫通するか
+    [SerializeField] private string shooterTag = "";
 
     [SerializeField] private AudioClip sound = null;
+
 
 
     /// <summary>
@@ -30,6 +32,7 @@ public abstract class Bullet : MonoBehaviour
     public virtual void OnTriggerEnter2D(Collider2D collider2D)
     {
         if (this.canPenetrate) return;
+        if (this.shooterTag == collider2D.tag) return;
         this.DestroyThisObject();
         return;
     }
@@ -138,6 +141,12 @@ public abstract class Bullet : MonoBehaviour
     public AudioClip Sound
     {
         get { return this.sound; }
+    }
+
+    public string ShooterTag
+    {
+        set { this.shooterTag = value; }
+        get { return this.shooterTag; }
     }
 
 }

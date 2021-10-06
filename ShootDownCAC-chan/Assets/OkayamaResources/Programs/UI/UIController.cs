@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text scoreValue;
     [SerializeField] private Text weaponName;
     [SerializeField] private GameObject StageUI;
+    [SerializeField] private GameObject StageBackGround;
     [SerializeField] private GameObject OptionUI;
     private GameManager gameManager;
     private Text stageTitle;
@@ -69,6 +70,33 @@ public class UIController : MonoBehaviour
         return;
     }
 
+    public void SetStageBackGround(bool value)
+    {
+        this.StageBackGround.SetActive(value);
+        return;
+    }
+
+    public IEnumerator ShowCharactorCenter(Image charactor)
+    {
+        this.SetStageBackGround(true);
+        BoxArea playableArea = AreaUtility.GetPlayableArea();
+        Vector2 titlePosition = playableArea.TopLeft + new Vector2(playableArea.GetWidth() / 2, playableArea.GetHeight() / 3);
+        titlePosition.Scale(new Vector2(1, -1));
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(titlePosition);
+        Vector2 centerPosition = screenPosition - new Vector2(Screen.width / 2, -Screen.height / 2);
+
+        Image createdCharactor = Object.Instantiate<Image>(charactor, parent: this.StageUI.transform);
+        createdCharactor.rectTransform.anchoredPosition = screenPosition - new Vector2(Screen.width, -Screen.height / 2);
+        Vector2 smoothVelocity = Vector2.zero;
+        while (true)
+        {
+            createdCharactor.rectTransform.anchoredPosition = Vector2.SmoothDamp(createdCharactor.rectTransform.anchoredPosition, centerPosition, ref smoothVelocity, 0.5f);
+            if (createdCharactor.rectTransform.anchoredPosition == centerPosition) break;
+            yield return new WaitForEndOfFrame();
+        }
+        yield return null;
+    }
+
     /// <summary>
     /// ステージタイトルを表示する
     /// </summary>
@@ -82,7 +110,7 @@ public class UIController : MonoBehaviour
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(titlePosition);
         screenPosition -= new Vector2(Screen.width / 2, -Screen.height / 2);
 
-        float scaleFactor = this.StageUI.GetComponent<Canvas>().scaleFactor;
+        //float scaleFactor = this.StageUI.GetComponent<Canvas>().scaleFactor;
 
         createdStageTitle.rectTransform.anchoredPosition = screenPosition;
         createdStageTitle.text = title;

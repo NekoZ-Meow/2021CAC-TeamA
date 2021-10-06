@@ -28,8 +28,9 @@ public class RandomSpawnEnemyEvent : Event
         {
             float x = Random.Range(playableArea.TopLeft.x, playableArea.BottomRight.x);
             Vector2 position = new Vector2(x, 6);
-            GameObject enemy = GameObject.Instantiate(this.enemy, position, Quaternion.identity);
-            enemy.GetComponent<EnemyMove>().Speed = this.enemySpeed;
+            GameObject enemy = GameObject.Instantiate(this.enemy, position, this.enemy.transform.rotation);
+            enemy.GetComponent<EnemyModel>().MoveSpeed = this.enemySpeed;
+            enemy.GetComponent<EnemyMove>().AddMovePoint(position + new Vector2(0, -15));
             yield return new WaitForSeconds(this.spawnInterval);
         }
 
