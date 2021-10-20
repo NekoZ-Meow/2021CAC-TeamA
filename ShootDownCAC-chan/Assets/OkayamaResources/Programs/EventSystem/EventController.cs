@@ -18,10 +18,19 @@ public class EventController : MonoBehaviour
     void Start()
     {
         GameObject enemy = Resources.Load<GameObject>("Enemy/TestEnemy");
+        Image bossImage = Object.Instantiate<Image>(Resources.Load<Image>("Enemy/BossCharactor"), new Vector3(999, 999, 999), Quaternion.identity);
         this.AddEvent(new ShowStageTitle("ステージ1"));
         this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
         this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
-        this.AddEvent(new ShowCharactorEvent(Resources.Load<Image>("Enemy/BossCharactor")));
+        this.AddEvent(new SetPlayerStatusEvent(canShot: false, canMove: false));
+        this.AddEvent(new ShowCharactorEvent(bossImage));
+        this.AddEvent(new ShowMessageWindowEvent());
+        this.AddEvent(new ShowMessageEvent("実に愚か。約束された滅びに抗おうなど。", "CACちゃん", 0.05f));
+        this.AddEvent(new ShowMessageEvent("この数百年、私はお前達を観察し続けてきた。私の目の前で、お前達は幾度も同じ過ち繰り返してきた。何故繰り返す。", "CACちゃん", 0.05f));
+        this.AddEvent(new ShowMessageEvent("滅びよ人間。この世界はお前達に相応しくない。疾く消え失せろ。", "CACちゃん", 0.05f));
+        this.AddEvent(new HideMessageWindowEvent());
+        this.AddEvent(new HideCharactorEvent(bossImage));
+        this.AddEvent(new SetPlayerStatusEvent(canShot: true, canMove: true));
         // this.AddEvent(new ShowStageTitle("ステージ1"));
         // this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
         // this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
