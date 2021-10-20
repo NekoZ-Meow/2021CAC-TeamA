@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private float hp = 0;
+    [SerializeField] private float hp = 3;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float damageRate = 1f;
     [SerializeField] float shotInterval = 0.1f;

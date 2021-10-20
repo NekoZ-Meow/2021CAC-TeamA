@@ -36,8 +36,7 @@ public class StraightEnemySpawnEvent : Event
         for (int i = 0; i < this.enemyNumber; i++)
         {
             GameObject enemy = GameObject.Instantiate(this.enemy, new Vector2(this.spawnPosition.x - i * diffX, spawnPosition.y - i * diffY), Quaternion.identity);
-            enemy.GetComponent<EnemyMove>().Speed = this.speed;
-            enemy.GetComponent<EnemyMove>().Direction = this.direction;
+            enemy.GetComponent<EnemyModel>().MoveSpeed = this.speed;
         }
 
         yield break;

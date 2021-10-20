@@ -16,6 +16,7 @@ public abstract class Shooting
         this.bullet = bullet;
         this.shooter = shooter;
         this.audioSource = this.shooter.GetComponent<AudioSource>();
+        this.bullet.ShooterTag = shooter.tag;
 
         return;
     }
@@ -48,7 +49,16 @@ public abstract class Shooting
         {
             if (value.GetComponent<Bullet>())
             {
-                this.bullet = value;
+                if (this.bullet != null)
+                {
+                    Bullet oldBullet = this.bullet;
+                    this.bullet = value;
+                    Object.Destroy(oldBullet);
+                }
+                else
+                {
+                    this.bullet = value;
+                }
             }
         }
 

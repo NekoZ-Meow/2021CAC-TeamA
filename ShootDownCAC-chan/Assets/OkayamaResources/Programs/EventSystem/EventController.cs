@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
+
 /// <summary>
 /// イベントの実行を管理するクラス
 /// 
@@ -14,19 +15,31 @@ public class EventController : MonoBehaviour
     [SerializeField] private int nowIndex = 0; // 現在のインデックス
     private IEnumerator nowRoutine = null; // 現在のルーチン
 
-
     void Start()
     {
         GameObject enemy = Resources.Load<GameObject>("Enemy/TestEnemy");
+        Image bossImage = Object.Instantiate<Image>(Resources.Load<Image>("Enemy/BossCharactor"), new Vector3(999, 999, 999), Quaternion.identity);
         this.AddEvent(new ShowStageTitle("ステージ1"));
         this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
         this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
-        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 180, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 3), speed: 2.5f));
-        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 0, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 5, 1), speed: 2.5f));
-        this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
-        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 330, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 3, 5), speed: 2));
-        this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 210, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 4), speed: 2));
-        this.AddEvent(new TestEvent("テスト1"));
+        this.AddEvent(new SetPlayerStatusEvent(canShot: false, canMove: false));
+        this.AddEvent(new ShowCharactorEvent(bossImage));
+        this.AddEvent(new ShowMessageWindowEvent());
+        this.AddEvent(new ShowMessageEvent("実に愚か。約束された滅びに抗おうなど。", "CACちゃん", 0.05f));
+        this.AddEvent(new ShowMessageEvent("この数百年、私はお前達を観察し続けてきた。私の目の前で、お前達は幾度も同じ過ち繰り返してきた。何故繰り返す。", "CACちゃん", 0.05f));
+        this.AddEvent(new ShowMessageEvent("滅びよ人間。この世界はお前達に相応しくない。疾く消え失せろ。", "CACちゃん", 0.05f));
+        this.AddEvent(new HideMessageWindowEvent());
+        this.AddEvent(new HideCharactorEvent(bossImage));
+        this.AddEvent(new SetPlayerStatusEvent(canShot: true, canMove: true));
+        // this.AddEvent(new ShowStageTitle("ステージ1"));
+        // this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
+        // this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
+        // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 180, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 3), speed: 2.5f));
+        // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 0, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 5, 1), speed: 2.5f));
+        // this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
+        // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 330, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 3, 5), speed: 2));
+        // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 210, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 4), speed: 2));
+        // this.AddEvent(new TestEvent("テスト1"));
         this.Play();
         return;
     }
