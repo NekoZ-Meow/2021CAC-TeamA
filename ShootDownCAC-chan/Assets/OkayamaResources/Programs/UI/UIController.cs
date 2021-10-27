@@ -13,16 +13,21 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject StageUI;
     [SerializeField] private GameObject StageBackGround;
     [SerializeField] private GameObject OptionUI;
+
+    [SerializeField] private GameObject hpField;
     private GameManager gameManager;
     private Text stageTitle;
     private Text messageBody;
     private Text messageName;
+
+    private Image playerHpImage;
 
     // Start is called before the first frame update
     void Start()
     {
         this.gameManager = GameObject.FindWithTag(Tags.GAME_MANAGER).GetComponent<GameManager>();
         this.stageTitle = Resources.Load<Text>("Text/StageTitle");
+        this.playerHpImage = Resources.Load<Image>("Player/PlayerHpImage");
         this.messageBody = this.messageWindow.transform.Find("MessageBody").GetComponent<Text>();
         this.messageName = this.messageWindow.transform.Find("MessageName").GetComponent<Text>();
     }
@@ -47,6 +52,30 @@ public class UIController : MonoBehaviour
         this.weaponName.text = name;
 
         return;
+    }
+
+    /// <summary>
+    /// プレイヤーのHPを表すイメージの数を設定する
+    /// </summary>
+    /// <param name="value">hp</param>
+    public void SetPlayerHp(int value)
+    {
+        if (value < 0) return;
+        int childCount = this.hpField.transform.childCount;
+        if (childCount < value)
+        {
+            for (int i = 0; i < value - childCount; i++)
+            {
+                Object.Instantiate(this.playerHpImage, Vector3.zero, Quaternion.Euler(0, 0, 90), this.hpField.transform);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < childCount - value; i++)
+            {
+                Object.Destroy(this.hpField.transform.GetChild(0).gameObject);
+            }
+        }
     }
 
     /// <summary>

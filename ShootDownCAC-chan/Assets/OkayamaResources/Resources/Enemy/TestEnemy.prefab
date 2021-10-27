@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4406891298473409995}
   - component: {fileID: 4406891298473409992}
-  - component: {fileID: 4406891298473409993}
   - component: {fileID: 4406891298473409989}
   - component: {fileID: 4406891298473409994}
   - component: {fileID: 4406891298473410037}
@@ -88,20 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4406891298473409993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4406891298473409998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f9151a6c9bdfc4f89afc21455dd1eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  moveSpeed: 1
 --- !u!61 &4406891298473409989
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,5 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa13f615880243769adee567e29ad95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 0.1
+  bulletSpeed: 0.05
   damage: 1
+  interval: 3

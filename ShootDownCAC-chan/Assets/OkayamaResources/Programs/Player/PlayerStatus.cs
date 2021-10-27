@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private float hp = 3;
+    [SerializeField] private int hp = 3;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float damageRate = 1f;
     [SerializeField] float shotInterval = 0.1f;
@@ -17,11 +17,16 @@ public class PlayerStatus : MonoBehaviour
 
     private GameManager gameManager;
 
+    private UIController uIController;
+
+
     // Start is called before the first frame update
     void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.gameManager = this.GetComponent<GameManager>();
+        this.uIController = GameObject.FindWithTag(Tags.UI_CONTROLLER).GetComponent<UIController>();
+        this.uIController.SetPlayerHp(this.hp);
         Vector3 imageSize = this.spriteRenderer.bounds.size;
         this.playerMovableArea = AreaUtility.GetPlayableArea();
         this.playerMovableArea.ChangeWidth(this.playerMovableArea.GetWidth() - imageSize.x);
@@ -35,14 +40,24 @@ public class PlayerStatus : MonoBehaviour
     {
         if (collision.tag == Tags.ENEMY_BULLET)
         {
-            this.Hp -= collision.GetComponent<Bullet>().Damage;
+            //this.Hp -= collision.GetComponent<Bullet>().Damage;
+            this.Hp = this.Hp - 1;
         }
     }
 
-    public float Hp
+    public int Hp
     {
         get { return this.hp; }
-        set { this.hp = value; }
+        set
+        {
+            this.hp = value;
+            this.uIController.SetPlayerHp(this.hp);
+            if (this.hp == 0)
+            {
+                Destroy(this.gameObject);
+                GameObject.FindWithTag(Tags.EVENT_CONTROLLER).GetComponent<EventController>().Stop();
+            }
+        }
     }
 
     public float MoveSpeed

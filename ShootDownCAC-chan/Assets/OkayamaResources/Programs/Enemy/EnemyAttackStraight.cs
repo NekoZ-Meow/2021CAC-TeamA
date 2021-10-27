@@ -6,6 +6,7 @@ public class EnemyAttackStraight : EnemyAttack
 {
     [SerializeField] float bulletSpeed = 3f;
     [SerializeField] float damage = 1f;
+    [SerializeField] float interval = 1f;
 
     private Bullet bullet;
 
@@ -15,18 +16,18 @@ public class EnemyAttackStraight : EnemyAttack
     /// <returns></returns>
     public override IEnumerator Attack()
     {
-        this.bullet = Bullets.GetNormalBullet(damage: 1, speed: 8);
+        this.bullet = Bullets.GetNormalEnemyBullet(damage: 1, speed: 8);
         Shooting normalShooting = new NormalShooting(this.gameObject, this.bullet);
 
         while (true)
         {
             normalShooting.Shoot();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(this.interval);
         }
     }
 
-    void onDestory()
+    void OnDestory()
     {
-        Object.Destroy(this.bullet);
+        Object.Destroy(this.bullet.gameObject);
     }
 }
