@@ -10,6 +10,8 @@ public class EnemyModel : MonoBehaviour
     [SerializeField] private float hp = 100; //敵の体力
     [SerializeField] private float moveSpeed = 1f; // 敵の速度
 
+    private bool canAttack = true;
+    private bool canMove = true;
 
     /// <summary>
     /// 弾丸に命中した時
@@ -67,5 +69,17 @@ public class EnemyModel : MonoBehaviour
     {
         get { return this.moveSpeed; }
         set { this.moveSpeed = value; }
+    }
+
+    public bool CanAttack
+    {
+        get { return this.canAttack; }
+        set { this.canAttack = value; }
+    }
+
+    public bool CanMove
+    {
+        get { return this.canMove; }
+        set { this.canMove = value; }
     }
 }

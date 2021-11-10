@@ -18,11 +18,15 @@ public class EventController : MonoBehaviour
     void Start()
     {
         GameObject enemy = Resources.Load<GameObject>("Enemy/TestEnemy");
+        GameObject boss = Instantiate(Resources.Load<GameObject>("Enemy/BossEnemy"), new Vector3(999, 999, 999), Quaternion.identity);
+        boss.GetComponent<EnemyModel>().CanAttack = false;
+        boss.GetComponent<EnemyModel>().CanMove = false;
         Image bossImage = Object.Instantiate<Image>(Resources.Load<Image>("Enemy/BossCharactor"), new Vector3(999, 999, 999), Quaternion.identity);
         this.AddEvent(new ShowStageTitle("ステージ1"));
-        this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
-        this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
+        // this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
+        // this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
         this.AddEvent(new SetPlayerStatusEvent(canShot: false, canMove: false));
+        this.AddEvent(new SpawnBossEvent(boss));
         this.AddEvent(new ShowCharactorEvent(bossImage));
         this.AddEvent(new ShowMessageWindowEvent());
         this.AddEvent(new ShowMessageEvent("実に愚か。約束された滅びに抗おうなど。", "CACちゃん", 0.05f));
@@ -31,7 +35,7 @@ public class EventController : MonoBehaviour
         this.AddEvent(new HideMessageWindowEvent());
         this.AddEvent(new HideCharactorEvent(bossImage));
         this.AddEvent(new SetPlayerStatusEvent(canShot: true, canMove: true));
-        // this.AddEvent(new ShowStageTitle("ステージ1"));
+        this.AddEvent(new SetBossStatusEvent(boss, true, true));
         // this.AddEvent(new RandomSpawnEnemyEvent(enemy, "敵生成", enemySpeed: 2f));
         // this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
         // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 180, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 3), speed: 2.5f));
@@ -39,7 +43,6 @@ public class EventController : MonoBehaviour
         // this.AddEvent(new WaitUntilAllEnemiesAreDestroyed());
         // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 330, new Vector2(Areas.SCREEN_AREA.TopLeft.x - 3, 5), speed: 2));
         // this.AddEvent(new StraightEnemySpawnEvent(enemy, 5, 210, new Vector2(Areas.SCREEN_AREA.BottomRight.x + 3, 4), speed: 2));
-        // this.AddEvent(new TestEvent("テスト1"));
         this.Play();
         return;
     }

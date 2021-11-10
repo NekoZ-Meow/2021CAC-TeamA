@@ -9,6 +9,7 @@ public class Bullets : MonoBehaviour
     private static ConcurrentDictionary<Bullet, ConcurrentQueue<Bullet>> bulletPool = new ConcurrentDictionary<Bullet, ConcurrentQueue<Bullet>>();
     private static readonly NormalBullet normalBullet = Resources.Load<NormalBullet>("Bullet/NormalBullet");
     private static readonly NormalBullet enemyBullet = Resources.Load<NormalBullet>("Bullet/EnemyBullet1");
+    private static readonly NormalBullet enemyBulletCircle = Resources.Load<NormalBullet>("Bullet/EnemyBulletCircle");
     private static readonly HomingBullet homingBullet = Resources.Load<HomingBullet>("Bullet/HomingBullet");
 
     private static readonly HomingBullet missile = Resources.Load<HomingBullet>("Bullet/Missile");
@@ -48,6 +49,15 @@ public class Bullets : MonoBehaviour
     public static NormalBullet GetNormalEnemyBullet(float damage = 1, float speed = 7, float timeToLive = 0)
     {
         NormalBullet bullet = Instantiate<NormalBullet>(Bullets.enemyBullet, outOfScreen, Quaternion.identity);
+        bullet.Damage = damage;
+        bullet.MoveSpeed = speed;
+        bullet.TimeToLive = timeToLive;
+        bullet.enabled = false;
+        return bullet;
+    }
+    public static NormalBullet GetCircleEnemyBullet(float damage = 1, float speed = 7, float timeToLive = 0)
+    {
+        NormalBullet bullet = Instantiate<NormalBullet>(Bullets.enemyBulletCircle, outOfScreen, Quaternion.identity);
         bullet.Damage = damage;
         bullet.MoveSpeed = speed;
         bullet.TimeToLive = timeToLive;
